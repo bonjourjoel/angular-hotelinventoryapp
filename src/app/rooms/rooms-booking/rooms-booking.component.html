@@ -1,0 +1,5 @@
+<a [routerLink]="['/rooms', ((id$ | async) ?? 0) - 1]">previous</a>
+
+Room booking #{{ id$ | async }}
+
+<a [routerLink]="['/rooms', ((id$ | async) ?? 0) + 1]">next</a>

@@ -1,0 +1,41 @@
+<!-- <h1>Welcome to {{ hotelName }}</h1> -->
+
+<hinv-header></hinv-header>
+
+<div [hidden]="hideRooms">
+  Number of rooms:
+  <span [innerText]="roomsCount$ | async"></span>
+</div>
+
+<!-- <h1>HTTP total bytes loaded: {{ totalBytes }}</h1> -->
+
+<div class="text-danger">{{ getError$ | async }}</div>
+
+<div>
+  <button (click)="toggle()">Toggle</button>
+  <button type="button" (click)="addRoom()">Add room</button>
+  <button type="button" (click)="editRoom()">Edit room</button>
+  <button type="button" (click)="deleteRoom()">Delete room</button>
+</div>
+
+<div>
+  <input
+    type="number"
+    class="form-control"
+    placeholder="price filter"
+    [formControl]="priceFilter"
+  />
+</div>
+
+<div *ngIf="!hideRooms">
+  <hinv-rooms-list
+    [rooms]="roomList"
+    [title]="title"
+    (selectedRoom)="selectRoom($event)"
+    [price]="priceFilter.value ?? 0"
+  ></hinv-rooms-list>
+</div>
+
+<!-- <div *ngIf="selectedRoom">selectedRoom: {{ selectedRoom | json }}</div> -->
+<hr />
+<router-outlet></router-outlet>

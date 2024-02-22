@@ -1,0 +1,107 @@
+<p>roomsForm.pristine={{ roomsForm.pristine | json }}</p>
+<p>roomsForm.dirty={{ roomsForm.dirty | json }}</p>
+<p>roomsForm.valid={{ roomsForm.valid | json }}</p>
+<p>roomsForm.invalid={{ roomsForm.invalid | json }}</p>
+<p>roomsForm.value={{ roomsForm.value | json }}</p>
+
+<div
+  *ngIf="successMessage != '' && roomsForm.pristine"
+  class="alert alert-success"
+>
+  {{ successMessage }}
+</div>
+
+<form #roomsForm="ngForm" (ngSubmit)="addRoom(roomsForm)">
+  <div class="form-group">
+    <input
+      required
+      class="form-control"
+      type="text"
+      name="roomType"
+      [(ngModel)]="room.roomType"
+      [ngModelOptions]="{ updateOn: 'blur' }"
+      placeholder="Room type"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      #roomAmenities="ngModel"
+      required
+      pattern="[a-z]+$"
+      minlength="5"
+      maxlength="20"
+      class="form-control"
+      type="text"
+      name="amenities"
+      [(ngModel)]="room.amenities"
+      placeholder="Amenities"
+    />
+  </div>
+  <div class="alert alert-danger" *ngIf="roomAmenities.errors?.['minlength']">
+    Amenities should be minimum 5 chars.
+  </div>
+  <div *ngIf="roomAmenities.dirty && roomAmenities.errors?.['required']">
+    Please provide the amenities
+  </div>
+  <div class="form-group">
+    <input
+      required
+      class="form-control"
+      type="number"
+      name="price"
+      [(ngModel)]="room.price"
+      placeholder="Price"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      required
+      class="form-control"
+      type="text"
+      name="photos"
+      [(ngModel)]="room.photos"
+      placeholder="Photos"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      required
+      class="form-control"
+      type="datetime"
+      name="checkInTime"
+      [(ngModel)]="room.checkInTime"
+      placeholder="Check in time"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      required
+      class="form-control"
+      type="datetime"
+      name="checkOutTime"
+      [(ngModel)]="room.checkOutTime"
+      placeholder="Check out time"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      required
+      min="1"
+      max="5"
+      class="form-control"
+      type="number"
+      name="rating"
+      [(ngModel)]="room.rating"
+      placeholder="Rating"
+    />
+  </div>
+  <div>
+    <button
+      class="btn btn-primary"
+      type="submit"
+      [disabled]="roomsForm.invalid"
+    >
+      Submit
+    </button>
+  </div>
+</form>

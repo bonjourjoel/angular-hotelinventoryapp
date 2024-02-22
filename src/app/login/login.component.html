@@ -1,0 +1,37 @@
+<form>
+  <div class="form-group">
+    <input
+      hinvHover="green"
+      hinvEmailValidator
+      #emailControl="ngModel"
+      type="email"
+      class="form-control"
+      name="email"
+      [(ngModel)]="email"
+      placeholder="Provide your username"
+    />
+  </div>
+  <div>
+    {{ emailControl.errors | json }}
+  </div>
+  <div class="form-group">
+    <input
+      hinvHover="blue"
+      type="password"
+      class="form-control"
+      name="password"
+      [(ngModel)]="password"
+      placeholder="Provide your password"
+    />
+  </div>
+  <div class="form-group">
+    <select name="role" class="form-control" [(ngModel)]="role">
+      <option value="Fail">Fail Authentication</option>
+      <option value="User">User</option>
+      <option value="Admin">Admin</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" (click)="login()">Login</button>
+  </div>
+</form>
